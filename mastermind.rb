@@ -31,13 +31,24 @@ class Mastermind
         i += 1
       end
     end
-
-    def guess_checker
-      []
-    end
-
-    def clue_generator; end
   end
-
-  p player.name
 end
+
+game = Mastermind.new
+
+player_guess = game.player.play_round
+computer_code = game.computer.code
+compare_clr_and_pos = []
+compare_clr_only = 0
+
+player_guess.each_with_index do |obj, ind|
+  compare_clr_and_pos[ind] = computer_code[ind] == obj
+  computer_code.any? do |clr|
+    compare_clr_only += 1 if clr == obj
+  end
+end
+
+p player_guess
+p computer_code
+p compare_clr_and_pos
+p compare_clr_only
